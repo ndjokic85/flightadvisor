@@ -1,0 +1,26 @@
+<?php
+
+namespace Tests\Feature\Api\v1\Users;
+
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class CreateUserTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    public function account_can_be_created()
+    {
+        $response = $this->postJson('api/v1/users', [
+            'first_name' => 'Jon',
+            'last_name' => 'Donald',
+            'username' => 'jon1985',
+            'password' => 'password'
+        ]);
+
+        $response->assertStatus(200);
+    }
+}
