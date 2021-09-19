@@ -20,6 +20,6 @@ class AccessAdmin
         if (Auth::user()->hasAnyRole('admin')) {
             return $next($request);
         }
-        return redirect('home');
+        return response('Unauthorized.', 401);
     }
 }
