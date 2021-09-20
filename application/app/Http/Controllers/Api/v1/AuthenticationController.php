@@ -24,10 +24,9 @@ class AuthenticationController extends Controller
 
     public function create(AuthenticationPostRequest $request)
     {
-        Role::create(['name' => 'test']);
-       /*  $user = $this->userRepository->create($request->validated());
+        $user = $this->userRepository->create($request->validated());
         $roleIds = $this->roleRepository->findRoleIdsByName(Role::USER_ROLE);
         $user->syncRoles($roleIds);
-        return UserResource::make($user->refresh())->response()->setStatusCode(201); */
+        return UserResource::make($user->refresh())->response()->setStatusCode(201);
     }
 }

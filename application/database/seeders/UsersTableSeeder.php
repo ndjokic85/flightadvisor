@@ -21,7 +21,6 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'Test',
             'password' => bcrypt('admin'),
-            'salt' => '123acdporimks09sff',
             'email' => 'admin@test.com',
         ]);
         $admin->roles()->attach($adminRole);

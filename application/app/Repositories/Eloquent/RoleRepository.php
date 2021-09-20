@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Role;
 use App\Repositories\IRoleRepository;
+use Illuminate\Support\Collection;
 
 class RoleRepository extends BaseRepository implements IRoleRepository
 {
@@ -15,6 +16,6 @@ class RoleRepository extends BaseRepository implements IRoleRepository
 
     public function findRoleIdsByName(string $name): array
     {
-        return $this->model->where('name', $name)->pluck('id');
+        return $this->model->where('name', $name)->pluck('id')->toArray();
     }
 }
