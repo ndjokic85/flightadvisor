@@ -39,7 +39,6 @@ class AuthenticationController extends Controller
         $user = $this->userRepository->create($attributes);
         $roleIds = $this->roleRepository->findRoleIdsByName(Role::USER_ROLE);
         $user->syncRoles($roleIds);
-        $user->createToken('tokens')->plainTextToken;
         return UserResource::make($user->refresh())->response()->setStatusCode(201);
     }
 
@@ -47,8 +46,8 @@ class AuthenticationController extends Controller
     {
         $user = User::where('username', $request->username)->first();
         if (Hash::check($request->password, $user->password)) {
-            $user->createToken('tokens')->plainTextToken;
-            return UserResource::make($user->refresh())->response()->setStatusCode(200);
+            $token = $user->createToken('auth-token')->plainTextToken;
+            return response(['data' => UserResource::make($user->refresh()), 'token' => $token], 200);
         }
         return response(["message" => 'User does not exist'], 422);
     }
