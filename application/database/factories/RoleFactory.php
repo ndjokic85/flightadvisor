@@ -32,4 +32,11 @@ class RoleFactory extends Factory
             'name' => Role::USER_ROLE
         ]);
     }
+
+    public function admin()
+    {
+        return $this->state([
+            'name' => Role::ADMIN_ROLE
+        ]);
+    }
 }
