@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->namespace('App\Http\Controllers\Api\v1\Admin')->prefix('v1/admin')->group(function () {
+    Route::post('/cities', 'CityController@create');
 });
 
 Route::namespace('App\Http\Controllers\Api\v1')
     ->prefix('v1')
     ->group(function () {
         Route::post('/users', 'AuthenticationController@create');
+        Route::post('/users/login', 'AuthenticationController@login');
     });
