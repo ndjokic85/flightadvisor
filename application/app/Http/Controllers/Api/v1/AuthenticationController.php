@@ -44,11 +44,14 @@ class AuthenticationController extends Controller
 
     public function login(AuthenticationLoginRequest $request)
     {
-        $user = User::where('username', $request->username)->first();
-        if (Hash::check($request->password, $user->password)) {
-            $token = $user->createToken('auth-token')->plainTextToken;
-            return response(['data' => UserResource::make($user->refresh()), 'token' => $token], 200);
+        $user = $this->userRepository->findUserByUsername($request->username);
+        if ($user && Hash::check($request->password, $user->password)) {
+            return response([
+                'data' => UserResource::make($user->refresh()),
+                'token' => $user->createToken('auth-token')->plainTextToken
+            ], 200);
         }
-        return response(["message" => 'User does not exist'], 422);
+
+        return response(["message" => 'Credentials are invalid'], 401);
     }
 }

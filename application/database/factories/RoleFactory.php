@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class RoleFactory extends Factory
 {
@@ -27,4 +26,10 @@ class RoleFactory extends Factory
         ];
     }
 
+    public function user()
+    {
+        return $this->state([
+            'name' => Role::USER_ROLE
+        ]);
+    }
 }
