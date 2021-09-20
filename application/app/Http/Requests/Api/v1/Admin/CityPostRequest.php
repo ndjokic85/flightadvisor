@@ -24,7 +24,9 @@ class CityPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|string|max:255|unique:cities'
+            'name' => 'required|string|max:255|unique:cities',
+            'description' => 'required|max:65535|sstring|',
+            'country_id' => 'required|number|exists:countries,id'
         ];
     }
 }

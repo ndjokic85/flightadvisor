@@ -25,6 +25,7 @@ class CityFactory extends Factory
     {
         return [
             'name' => $this->faker->country(),
+            'description' => $this->faker->text(300),
             'user_id' => User::factory()->create()->id,
             'country_id' => Country::factory()->create()->id
         ];
