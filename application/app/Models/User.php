@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', $role)->first() !== null;
     }
+
+    public function syncRoles(array $roleIds)
+    {
+        $this->roles()->sync($roleIds);
+    }
 }

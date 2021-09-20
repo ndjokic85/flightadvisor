@@ -16,7 +16,6 @@ class BaseRepository implements IRepository
 
     public function create(array $attributes): Model
     {
-        
         return $this->model->create($attributes);
     }
 

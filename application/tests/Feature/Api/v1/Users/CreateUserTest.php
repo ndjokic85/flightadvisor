@@ -2,14 +2,12 @@
 
 namespace Tests\Feature\Api\v1\Users;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
-    use RefreshDatabase;
 
     /** @test */
     public function account_can_be_created()
