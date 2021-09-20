@@ -15,7 +15,6 @@ class CityController extends Controller
 
     public function create(Request $request)
     {
-dd('test');
         //return UserResource::make($user->refresh())->response()->setStatusCode(201);
     }
 }

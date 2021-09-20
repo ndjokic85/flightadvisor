@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Repositories\IRoleRepository;
 use App\Repositories\IUserRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
@@ -36,9 +37,12 @@ class AuthenticationController extends Controller
     {
         $attributes = $request->validated();
         $attributes['password'] = Hash::make($request->password);
-        $user = $this->userRepository->create($attributes);
-        $roleIds = $this->roleRepository->findRoleIdsByName(Role::USER_ROLE);
-        $user->syncRoles($roleIds);
+        $user = DB::transaction(function () use ($attributes) {
+            $roleIds = $this->roleRepository->findRoleIdsByName(Role::USER_ROLE);
+            $user = $this->userRepository->create($attributes);
+            $user->syncRoles($roleIds);
+            return $user;
+        });
         return UserResource::make($user->refresh())->response()->setStatusCode(201);
     }
 
