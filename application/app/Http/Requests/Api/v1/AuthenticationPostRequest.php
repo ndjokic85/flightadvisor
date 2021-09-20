@@ -15,9 +15,10 @@ class AuthenticationPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
-            'username' => 'required|min:6',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|max:255|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6'
         ];
     }

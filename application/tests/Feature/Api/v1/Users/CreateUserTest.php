@@ -18,6 +18,7 @@ class CreateUserTest extends TestCase
             'first_name' => 'Jon',
             'last_name' => 'Donald',
             'username' => 'jon1985',
+            'email' => 'jon@test.com',
             'password' => 'password'
         ]);
 
