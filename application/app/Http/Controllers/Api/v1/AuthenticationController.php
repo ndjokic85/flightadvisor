@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
 
     private IRoleRepository $roleRepository;
 
-    protected $username;
+    protected string $username;
 
     public function __construct(IUserRepository $userRepository, IRoleRepository $roleRepository)
     {
