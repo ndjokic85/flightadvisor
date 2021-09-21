@@ -231,5 +231,20 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'airport_import_fields' => [
+        'id',
+        'name',
+        'city',
+        'company',
+        'iata',
+        'icao',
+        'latitude',
+        'longitude',
+        'altitude',
+        'timezone',
+        'dst',
+        'tz',
+        'type',
+        'source',
+    ]
 ];

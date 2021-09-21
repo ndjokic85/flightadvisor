@@ -18,8 +18,8 @@ class CreateAirportsTable extends Migration
             $table->string('name');
             $table->char('iata', 3)->nullable();
             $table->char('icao', 4)->nullable();
-            $table->decimal('latitude', 12, 11);
-            $table->decimal('longitude', 12, 11);
+            $table->decimal('latitude', 30, 25);
+            $table->decimal('longitude', 30, 25);
             $table->integer('altitude');
             $table->integer('timezone');
             $table->enum('dst', ['E', 'N', 'A', 'S', 'O', 'Z', 'U']);

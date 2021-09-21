@@ -5,13 +5,24 @@ namespace App\Http\Controllers\Api\v1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Admin\AirportImportRequest;
 use App\Jobs\AirportFileProcess;
+use App\Repositories\IAirportRepository;
+use App\Repositories\ICityRepository;
 
 class AirportImporterController extends Controller
 {
 
+    private IAirportRepository $airPortRepository;
+    private ICityRepository $cityRepository;
+
+    public function __construct(IAirportRepository $airPortRepository, ICityRepository $cityRepository)
+    {
+        $this->airPortRepository = $airPortRepository;
+        $this->cityRepository  = $cityRepository;
+    }
     public function import(AirportImportRequest $request)
     {
-        dd('test');
-        AirportFileProcess::dispatch();
+        $path = $request->file('file')->getRealPath();
+        $csvData = array_map('str_getcsv', file($path));
+        AirportFileProcess::dispatch($csvData, $this->airPortRepository, $this->cityRepository);
     }
 }

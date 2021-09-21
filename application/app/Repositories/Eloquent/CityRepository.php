@@ -3,10 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\City;
-use App\Models\Role;
 use App\Repositories\ICityRepository;
-use App\Repositories\IRoleRepository;
-use Illuminate\Support\Collection;
 
 class CityRepository extends BaseRepository implements ICityRepository
 {
@@ -16,4 +13,8 @@ class CityRepository extends BaseRepository implements ICityRepository
         parent::__construct($model);
     }
 
+    public function findByName(string $name): ?City
+    {
+        return $this->model->where('name', $name)->first();
+    }
 }

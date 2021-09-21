@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquent\AirportRepository;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\IAirportRepository;
 use App\Repositories\ICityRepository;
 use App\Repositories\IRepository;
 use App\Repositories\IRoleRepository;
@@ -25,6 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IRoleRepository::class, RoleRepository::class);
         $this->app->bind(ICityRepository::class, CityRepository::class);
+        $this->app->bind(IAirportRepository::class, AirportRepository::class);
     }
     /**
      * Bootstrap services.

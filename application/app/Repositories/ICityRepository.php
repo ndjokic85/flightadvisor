@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\City;
 
 interface ICityRepository
 {
-   
+    public function findByName(string $name): ?City;
 }
