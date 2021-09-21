@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
  Route::middleware(['auth:sanctum','auth.admin'])->namespace('App\Http\Controllers\Api\v1\Admin')->prefix('v1/admin')->group(function () {
     Route::post('/cities', 'CityController@create');
+    Route::post('/airport-import', 'AirportImporterController@import');
 });
 Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1')->group(function () {
     Route::post('/users', 'AuthenticationController@create');
