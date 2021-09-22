@@ -20,15 +20,15 @@ Route::middleware(['auth:sanctum', 'auth.admin'])->namespace('App\Http\Controlle
     Route::post('/route-import', 'RouteImporterController@import');
 });
 
-Route::middleware(['auth:sanctum'])->namespace('App\Http\Controllers\Api\v1\User')->prefix('v1/')->group(function () {
-    Route::get('/cities', 'CityController@index');
-    Route::post('/cities/{city}/comment', 'CityCommentController@create');
+Route::middleware(['auth:sanctum'])->namespace('App\Http\Controllers\Api\v1\User')->prefix('v1/cities')->group(function () {
+    Route::get('/', 'CityController@index');
+    Route::post('/{city}/comments', 'CityCommentController@create');
     Route::middleware(['comment.owner'])->group(function () {
-        Route::patch('/cities/{city}/comment/{comment}', 'CityCommentController@update');
-        Route::delete('/cities/{city}/comment/{comment}', 'CityCommentController@delete');
+        Route::patch('/{city}/comments/{comment}', 'CityCommentController@update');
+        Route::delete('/{city}/comments/{comment}', 'CityCommentController@delete');
     });
 });
-Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1')->group(function () {
-    Route::post('/users', 'AuthenticationController@create');
-    Route::post('/users/login', 'AuthenticationController@login');
+Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1/users')->group(function () {
+    Route::post('/', 'AuthenticationController@create');
+    Route::post('/login', 'AuthenticationController@login');
 });

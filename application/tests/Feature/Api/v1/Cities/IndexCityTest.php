@@ -87,7 +87,12 @@ class IndexCityTest extends TestCase
         Comment::factory()->count(5)->create(['city_id' => $city->id]);
         Sanctum::actingAs($user);
         $commentsLimit = 'string';
-        $this->getJson($this->url . '?comments_limit=' . $commentsLimit)
+        $response = $this->getJson($this->url . '?comments_limit=' . $commentsLimit)
             ->assertUnprocessable();
+        $response->assertJsonValidationErrors(['comments_limit']);
+        $this->assertSame(
+            'The comments limit must be a number.',
+            $response->json('errors.comments_limit.0')
+        );
     }
 }
