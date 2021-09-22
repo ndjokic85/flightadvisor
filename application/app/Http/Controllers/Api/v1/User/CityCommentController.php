@@ -31,6 +31,7 @@ class CityCommentController extends Controller
         return CommentResource::make($comment->refresh())->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
+    
     public function update(CityCommentRequest $request, City $city, Comment $comment)
     {
         $attributes = $request->validated();

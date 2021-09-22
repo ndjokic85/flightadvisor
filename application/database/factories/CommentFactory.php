@@ -3,18 +3,19 @@
 namespace Database\Factories;
 
 use App\Models\City;
+use App\Models\Comment;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CityFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = City::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -24,9 +25,9 @@ class CityFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->city(),
-            'description' => $this->faker->text(300),
-            'country_id' => Country::factory()->create()->id
+            'comment' => $this->faker->text(),
+            'user_id' => User::factory()->create()->id,
+            'city_id' => City::factory()->create()->id
         ];
     }
 }

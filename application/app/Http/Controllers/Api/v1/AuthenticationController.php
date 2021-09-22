@@ -48,7 +48,7 @@ class AuthenticationController extends Controller
 
     public function login(AuthenticationLoginRequest $request)
     {
-        $user = $this->userRepository->findUserByUsername($request->username);
+        $user = $this->userRepository->findByUsername($request->username);
         if ($user && Hash::check($request->password, $user->password)) {
             return response([
                 'data' => UserResource::make($user->refresh()),

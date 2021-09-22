@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 interface IUserRepository
 {
-    public function findUserByUsername(string $username): ?Model;
+    public function findByUsername(string $username): ?Model;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\v1\Authorisation;
+namespace Tests\Feature\Api\v1\Authorization;
 
 use App\Http\Resources\UserResource;
 use App\Models\Role;
