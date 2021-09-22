@@ -9,16 +9,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Repositories\IAirportRepository;
-use App\Repositories\ICityRepository;
+use App\Repositories\IRouteRepository;
 use App\Validators\IValidator;
 use Illuminate\Support\Facades\DB;
 
-class AirportFileProcess implements ShouldQueue
+class RouteFileProcess implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private IAirportRepository $airPortRepository;
-    private ICityRepository $cityRepository;
+    private IRouteRepository $routeRepository;
     private IValidator $validator;
     public array $data;
 
@@ -27,11 +27,11 @@ class AirportFileProcess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(array $data, IAirportRepository $airPortRepository, ICityRepository $cityRepository, IValidator $validator)
+    public function __construct(array $data, IAirportRepository $airPortRepository, IRouteRepository $routeRepository, IValidator $validator)
     {
         $this->data = $data;
         $this->airPortRepository = $airPortRepository;
-        $this->cityRepository = $cityRepository;
+        $this->routeRepository = $routeRepository;
         $this->validator = $validator;
     }
 
@@ -44,12 +44,9 @@ class AirportFileProcess implements ShouldQueue
     {
         DB::transaction(function () {
             foreach ($this->data as $row) {
-                $attributes = array_combine(config('app.airport_import_fields'), $row);
-                unset($attributes['company']);
+                $attributes = array_combine(config('app.route_import_fields'), $row);
                 if ($this->validator->check($attributes)) {
-                    $city = $this->cityRepository->findByName($attributes['city']);
-                    $attributes['city_id'] = $city->id;
-                    $this->airPortRepository->create($attributes);
+                    $this->routeRepository->create($attributes);
                 }
             }
         });

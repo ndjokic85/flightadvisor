@@ -246,5 +246,17 @@ return [
         'tz',
         'type',
         'source',
+    ],
+    'route_import_fields' => [
+        'airline',
+        'airline_id',
+        'source_airport',
+        'source_airport_id',
+        'destination_airport',
+        'destination_airport_id',
+        'codeshare',
+        'stops',
+        'equipment',
+        'price',
     ]
 ];

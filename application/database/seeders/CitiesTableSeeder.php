@@ -18,7 +18,8 @@ class CitiesTableSeeder extends Seeder
         $countries = [
             'Papua New Guinea' => ['Goroka', 'Madang', 'Mount Hagen'],
             'Canada' => ['Tofino', 'Bagotville', 'Baker Lake'],
-            'Germany' => ['Dessau', 'Barth', 'Kyritz']
+            'Germany' => ['Dessau', 'Barth', 'Kyritz'],
+            'Philippines' => ['Ozamis']
         ];
         foreach ($countries as $country => $cities) {
             $country = Country::where('name', $country)->first();

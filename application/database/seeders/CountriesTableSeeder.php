@@ -21,7 +21,8 @@ class CountriesTableSeeder extends Seeder
             'France',
             'Germany',
             'Papua New Guinea',
-            'Canada'
+            'Canada',
+            'Philippines',
         ];
         foreach ($countries as $countryName) {
             Country::create(['name' => $countryName]);
