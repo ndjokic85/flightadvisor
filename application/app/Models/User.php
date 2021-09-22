@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function roles(): BelongsToMany
     {
-        return  $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class);
     }
 
     public function hasRole(string $role): bool
@@ -61,5 +61,10 @@ class User extends Authenticatable
     public function syncRoles(array $roleIds)
     {
         $this->roles()->sync($roleIds);
+    }
+    
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

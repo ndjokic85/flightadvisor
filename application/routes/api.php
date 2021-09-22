@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
     Route::post('/airport-import', 'AirportImporterController@import');
     Route::post('/route-import', 'RouteImporterController@import');
 });
+
+Route::middleware(['auth:sanctum'])->namespace('App\Http\Controllers\Api\v1\User')->prefix('v1/')->group(function () {
+    Route::get('/cities', 'CityController@index');
+    Route::post('/cities/{city}/comment', 'CityCommentController@create');
+});
 Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1')->group(function () {
     Route::post('/users', 'AuthenticationController@create');
     Route::post('/users/login', 'AuthenticationController@login');

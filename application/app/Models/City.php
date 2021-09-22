@@ -24,4 +24,14 @@ class City extends Model
     {
         return $this->hasMany(Airport::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function latestComments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->orderBy('id', 'DESC');
+    }
 }
