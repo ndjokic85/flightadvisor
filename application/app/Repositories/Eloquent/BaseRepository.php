@@ -39,8 +39,8 @@ class BaseRepository implements IRepository
         $model->delete();
     }
 
-    public function all(int $limit = null, int $skip = 0): Collection
+    public function all(): Collection
     {
-        return $this->model->skip($skip)->take($limit)->get();
+        return $this->model->all();
     }
 }
