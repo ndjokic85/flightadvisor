@@ -14,9 +14,4 @@ class CommentRepository extends BaseRepository implements ICommentRepository
     {
         parent::__construct($model);
     }
-
-    public function update(int $id, array $attributes)
-    {
-        return $this->model->whereId($id)->update($attributes);
-    }
 }

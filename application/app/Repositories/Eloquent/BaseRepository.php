@@ -18,6 +18,10 @@ class BaseRepository implements IRepository
     {
         return $this->model->create($attributes);
     }
+    public function update(int $id, array $attributes)
+    {
+        return $this->model->whereId($id)->update($attributes);
+    }
 
     public function find(int $id): ?Model
     {
@@ -27,5 +31,9 @@ class BaseRepository implements IRepository
     public function firstOrCreate(array $matchingFields, array $attributes): Model
     {
         return $this->model->firstOrCreate($matchingFields, $attributes);
+    }
+    public function delete(Model $model)
+    {
+        $model->delete();
     }
 }

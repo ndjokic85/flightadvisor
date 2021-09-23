@@ -31,18 +31,17 @@ class CityCommentController extends Controller
         return CommentResource::make($comment->refresh())->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
-    
+
     public function update(CityCommentRequest $request, City $city, Comment $comment)
     {
-        $attributes = $request->validated();
-        $this->commentRepository->update($comment->id, $attributes);
+        $this->commentRepository->update($comment->id, $request->validated());
         return CommentResource::make($comment->refresh())->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
     public function delete(City $city, Comment $comment)
     {
-        $comment->delete();
+        $this->commentRepository->delete($comment);
         return response()->json()->setStatusCode(Response::HTTP_NO_CONTENT);
     }
 }

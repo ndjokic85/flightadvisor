@@ -30,6 +30,10 @@ Route::middleware(['auth:sanctum'])
                 Route::delete('/{city}/comments/{comment}', 'CityCommentController@delete');
             });
         });
+
+        Route::namespace('App\Http\Controllers\Api\v1\User')->prefix('v1')->group(function () {
+            Route::get('/routes', 'RouteController@index'); 
+        });
     });
 Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1/users')->group(function () {
     Route::post('/', 'AuthenticationController@create');

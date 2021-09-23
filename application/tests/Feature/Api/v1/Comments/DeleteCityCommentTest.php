@@ -20,8 +20,16 @@ class DeleteCityCommentTest extends TestCase
         $roleIds = collect([$role->id])->toArray();
         $user->syncRoles($roleIds);
         $city = City::factory()->create();
-        $comment1 = Comment::factory()->create(['comment' => 'Comment 1', 'user_id' => $user->id]);
-        $comment2 = Comment::factory()->create(['comment' => 'Comment 2', 'user_id' => $user->id]);
+        $comment1 = Comment::factory()->create([
+            'comment' => 'Comment 1', 
+            'user_id' => $user->id,
+            'city_id' => $city->id
+        ]);
+        $comment2 = Comment::factory()->create([
+            'comment' => 'Comment 2', 
+            'user_id' => $user->id,
+            'city_id' => $city->id
+        ]);
         $this->assertEquals('Comment 1', $comment1->comment);
         $this->assertEquals('Comment 2', $comment2->comment);
         Sanctum::actingAs($user);
