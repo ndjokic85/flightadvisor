@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    supervisor
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -36,9 +37,17 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
+COPY conf/supervisord.conf /usr/bin/supervisord.conf
+
 # Change current user to www
 USER www
 
+WORKDIR /var/www
+
+CMD ["php-fpm"] && \
+    composer install && \
+    wait-for-it mysql:4306 -- php bin/console artisan migrate:fresh --seed && \
+    supervisord -c /usr/bin/supervisord.conf
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD ["php-fpm"]
