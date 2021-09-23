@@ -16,6 +16,6 @@ class RoleRepository extends BaseRepository implements IRoleRepository
 
     public function findRoleIdsByName(string $name): array
     {
-        return $this->model->where('name', $name)->pluck('id')->toArray();
+        return $this->model->whereName($name)->pluck('id')->toArray();
     }
 }

@@ -28,8 +28,12 @@ class AirportFileProcess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(array $data, IAirportRepository $airPortRepository, ICityRepository $cityRepository, IValidator $validator)
-    {
+    public function __construct(
+        array $data,
+        IAirportRepository $airPortRepository,
+        ICityRepository $cityRepository,
+        IValidator $validator
+    ) {
         $this->data = $data;
         $this->airPortRepository = $airPortRepository;
         $this->cityRepository = $cityRepository;

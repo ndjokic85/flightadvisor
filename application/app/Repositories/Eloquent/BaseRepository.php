@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Repositories\IRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository implements IRepository
@@ -32,8 +33,14 @@ class BaseRepository implements IRepository
     {
         return $this->model->firstOrCreate($matchingFields, $attributes);
     }
+
     public function delete(Model $model)
     {
         $model->delete();
+    }
+
+    public function all(int $limit = null, int $skip = 0): Collection
+    {
+        return $this->model->skip($skip)->take($limit)->get();
     }
 }

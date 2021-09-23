@@ -38,7 +38,7 @@ class IndexCityTest extends TestCase
             Comment::factory()->count(2)->create(['city_id' => $item->id]);
         });
 
-        $cities = $this->cityRepository->all(null);
+        $cities = $this->cityRepository->all();
         Sanctum::actingAs($user);
         $this->getJson($this->url)
             ->assertSuccessful()

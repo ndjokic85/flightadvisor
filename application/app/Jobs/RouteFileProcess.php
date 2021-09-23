@@ -27,8 +27,12 @@ class RouteFileProcess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(array $data, IAirportRepository $airPortRepository, IRouteRepository $routeRepository, IValidator $validator)
-    {
+    public function __construct(
+        array $data,
+        IAirportRepository $airPortRepository,
+        IRouteRepository $routeRepository,
+        IValidator $validator
+    ) {
         $this->data = $data;
         $this->airPortRepository = $airPortRepository;
         $this->routeRepository = $routeRepository;
