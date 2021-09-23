@@ -22,7 +22,11 @@ class UpdateCityCommentTest extends TestCase
         $user = User::factory()->create();
         $user->syncRoles($roleIds);
         $city = City::factory()->create();
-        $comment = Comment::factory()->create(['comment' => 'Comment current', 'user_id' => $user->id]);
+        $comment = Comment::factory()->create([
+            'comment' => 'Comment current',
+            'user_id' => $user->id,
+            'city_id' => $city->id
+        ]);
         $this->assertEquals('Comment current', $comment->comment);
         Sanctum::actingAs($user);
         $response = $this->patchJson('api/v1/cities/' . $city->id . '/comments/' . $comment->id, [
@@ -43,7 +47,11 @@ class UpdateCityCommentTest extends TestCase
         $user1->syncRoles($roleIds);
         $user2->syncRoles($roleIds);
         $city = City::factory()->create();
-        $comment = Comment::factory()->create(['comment' => 'Comment current', 'user_id' => $user1->id]);
+        $comment = Comment::factory()->create([
+            'comment' => 'Comment current',
+            'user_id' => $user1->id,
+            'city_id' => $city->id
+        ]);
         $this->assertEquals('Comment current', $comment->comment);
         Sanctum::actingAs($user2);
         $response = $this->patchJson('api/v1/cities/' . $city->id . '/comments/' . $comment->id, [
@@ -60,7 +68,11 @@ class UpdateCityCommentTest extends TestCase
         $user = User::factory()->create();
         $user->syncRoles($roleIds);
         $city = City::factory()->create();
-        $comment = Comment::factory()->create(['comment' => 'Comment current']);
+        $comment = Comment::factory()->create([
+            'comment' => 'Comment current',
+            'city_id' => $city->id,
+            'user_id' => $user->id,
+        ]);
         $response = $this->patchJson('api/v1/cities/' . $city->id . '/comments/' . $comment->id, [
             'comment' => 'New comment 1'
         ]);
@@ -75,7 +87,11 @@ class UpdateCityCommentTest extends TestCase
         $user = User::factory()->create();
         $user->syncRoles($roleIds);
         $city = City::factory()->create();
-        $comment = Comment::factory()->create(['comment' => 'Comment current', 'user_id' => $user->id]);
+        $comment = Comment::factory()->create([
+            'comment' => 'Comment current',
+            'user_id' => $user->id,
+            'city_id' => $city->id
+        ]);
         Sanctum::actingAs($user);
         $response = $this->patchJson('api/v1/cities/' . $city->id . '/comments/' . $comment->id, [
             'comment' => ''

@@ -12,7 +12,6 @@ use Tests\TestCase;
 class CreateCityCommentTest extends TestCase
 {
 
-
     /** @test */
     public function city_comment_can_be_created_by_auth_user()
     {
