@@ -30,8 +30,9 @@ class IndexCityTest extends TestCase
     {
         $country = Country::factory()->create(['name' => 'country1']);
         $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($role->pluck('id')->toArray());
+        $user->syncRoles($roleIds);
         $cities = City::factory()->count(3)->create(['country_id' => $country->id]);
         $cities->each(function ($item, $key) {
             Comment::factory()->count(2)->create(['city_id' => $item->id]);
@@ -49,8 +50,9 @@ class IndexCityTest extends TestCase
     {
         $country = Country::factory()->create(['name' => 'country2']);
         $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($role->pluck('id')->toArray());
+        $user->syncRoles($roleIds);
         $commentsLimit = 3;
         $city = City::factory()->create(['country_id' => $country->id]);
         Comment::factory()->count(5)->create(['city_id' => $city->id]);
@@ -67,8 +69,9 @@ class IndexCityTest extends TestCase
     {
         $country = Country::factory()->create(['name' => 'country2']);
         $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($role->pluck('id')->toArray());
+        $user->syncRoles($roleIds);
         $city = City::factory()->create(['country_id' => $country->id]);
         Comment::factory()->count(2)->create(['city_id' => $city->id]);
         $this->getJson($this->url)
@@ -81,8 +84,9 @@ class IndexCityTest extends TestCase
     {
         $country = Country::factory()->create(['name' => 'country2']);
         $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($role->pluck('id')->toArray());
+        $user->syncRoles($roleIds);
         $city = City::factory()->create(['country_id' => $country->id]);
         Comment::factory()->count(5)->create(['city_id' => $city->id]);
         Sanctum::actingAs($user);

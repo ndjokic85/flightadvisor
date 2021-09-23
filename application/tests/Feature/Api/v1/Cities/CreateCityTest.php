@@ -16,9 +16,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function city_can_be_created_only_by_admin()
     {
-        $role = Role::factory()->admin()->create();
+        $adminRole = Role::factory()->admin()->create();
+        $adminRoleIds = collect([$adminRole->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($role->pluck('id')->toArray());
+        $user->syncRoles($adminRoleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'name' => 'New York',
@@ -31,9 +32,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function city_cannot_be_created_by_regular_user()
     {
-        $roleId = Role::factory()->user()->create()->pluck('id')->toArray();
+        $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'name' => 'London',
@@ -46,9 +48,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function name_is_required()
     {
-        $roleId = Role::factory()->admin()->create()->pluck('id')->toArray();
+        $role= Role::factory()->admin()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'name' => ''
@@ -64,9 +67,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function description_is_required()
     {
-        $roleId = Role::factory()->admin()->create()->pluck('id')->toArray();
+        $role = Role::factory()->admin()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'description' => ''
@@ -82,9 +86,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function country_id_is_required()
     {
-        $roleId = Role::factory()->admin()->create()->pluck('id')->toArray();
+        $role = Role::factory()->admin()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'country_id' => ''
@@ -100,9 +105,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function country_id_must_exists_in_countries_table()
     {
-        $roleId = Role::factory()->admin()->create()->pluck('id')->toArray();
+        $role = Role::factory()->admin()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'country_id' => 7
@@ -118,9 +124,10 @@ class CreateCityTest extends TestCase
     /** @test */
     public function country_id_must_be_numeric()
     {
-        $roleId = Role::factory()->admin()->create()->pluck('id')->toArray();
+        $role = Role::factory()->admin()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         Sanctum::actingAs($user);
         $response = $this->postJson($this->url, [
             'country_id' => 'd'
