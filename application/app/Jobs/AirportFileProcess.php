@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Airport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,7 +50,8 @@ class AirportFileProcess implements ShouldQueue
                 if ($this->validator->check($attributes)) {
                     $city = $this->cityRepository->findByName($attributes['city']);
                     $attributes['city_id'] = $city->id;
-                    $this->airPortRepository->create($attributes);
+                    $matchingFields = ['id' => $attributes['id']];
+                    $this->airPortRepository->firstOrCreate($matchingFields, $attributes);
                 }
             }
         });

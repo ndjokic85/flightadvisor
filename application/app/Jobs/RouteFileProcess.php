@@ -46,7 +46,11 @@ class RouteFileProcess implements ShouldQueue
             foreach ($this->data as $row) {
                 $attributes = array_combine(config('app.route_import_fields'), $row);
                 if ($this->validator->check($attributes)) {
-                    $this->routeRepository->create($attributes);
+                    $matchingFields = [
+                        'source_airport_id' => $attributes['source_airport_id'],
+                        'destination_airport_id' => $attributes['destination_airport_id'],
+                    ];
+                    $this->routeRepository->firstOrCreate($matchingFields, $attributes);
                 }
             }
         });

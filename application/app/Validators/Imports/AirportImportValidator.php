@@ -29,7 +29,6 @@ class AirportImportValidator implements IValidator
             'id' => [
                 'required',
                 'numeric',
-                'unique:airports'
             ],
             'latitude' => [
                 'required',

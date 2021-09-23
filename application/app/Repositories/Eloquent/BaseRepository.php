@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BaseRepository implements IRepository
 {
     protected Model $model;
-    
+
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -22,5 +22,10 @@ class BaseRepository implements IRepository
     public function find(int $id): ?Model
     {
         return $this->model->find($id);
+    }
+
+    public function firstOrCreate(array $matchingFields, array $attributes): Model
+    {
+        return $this->model->firstOrCreate($matchingFields, $attributes);
     }
 }
