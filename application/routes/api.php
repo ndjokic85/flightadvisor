@@ -14,20 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'auth.admin'])->namespace('App\Http\Controllers\Api\v1\Admin')->prefix('v1/admin')->group(function () {
-    Route::post('/cities', 'CityController@create');
-    Route::post('/airport-import', 'AirportImporterController@import');
-    Route::post('/route-import', 'RouteImporterController@import');
-});
+Route::middleware(['auth:sanctum'])
+    ->group(function () {
+        Route::middleware(['auth.admin'])->namespace('App\Http\Controllers\Api\v1\Admin')->prefix('v1/admin')->group(function () {
+            Route::post('/cities', 'CityController@create');
+            Route::post('/airport-import', 'AirportImporterController@import');
+            Route::post('/route-import', 'RouteImporterController@import');
+        });
 
-Route::middleware(['auth:sanctum'])->namespace('App\Http\Controllers\Api\v1\User')->prefix('v1/cities')->group(function () {
-    Route::get('/', 'CityController@index');
-    Route::post('/{city}/comments', 'CityCommentController@create');
-    Route::middleware(['comment.owner'])->group(function () {
-        Route::patch('/{city}/comments/{comment}', 'CityCommentController@update');
-        Route::delete('/{city}/comments/{comment}', 'CityCommentController@delete');
+        Route::namespace('App\Http\Controllers\Api\v1\User')->prefix('v1/cities')->group(function () {
+            Route::get('/', 'CityController@index');
+            Route::post('/{city}/comments', 'CityCommentController@create');
+            Route::middleware(['comment.owner'])->group(function () {
+                Route::patch('/{city}/comments/{comment}', 'CityCommentController@update');
+                Route::delete('/{city}/comments/{comment}', 'CityCommentController@delete');
+            });
+        });
     });
-});
 Route::namespace('App\Http\Controllers\Api\v1')->prefix('v1/users')->group(function () {
     Route::post('/', 'AuthenticationController@create');
     Route::post('/login', 'AuthenticationController@login');
