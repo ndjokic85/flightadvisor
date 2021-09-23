@@ -14,7 +14,7 @@ class CityPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:cities',
+            'name' => 'required|string|max:255',
             'description' => 'required|max:65535|string',
             'country_id' => 'required|numeric|exists:countries,id'
         ];
