@@ -1,0 +1,576 @@
+{
+	"info": {
+		"_postman_id": "b354064c-7c42-4f03-9e34-e3ac12cc6a4b",
+		"name": "MyCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": []
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "City",
+					"item": [
+						{
+							"name": "Comment",
+							"item": [
+								{
+									"name": "Create comment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "comment",
+													"value": "test",
+													"type": "text"
+												},
+												{
+													"key": "",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:8088/api/v1/cities/1/comments",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8088",
+											"path": [
+												"api",
+												"v1",
+												"cities",
+												"1",
+												"comments"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete comment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:8088/api/v1/cities/1/comments/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8088",
+											"path": [
+												"api",
+												"v1",
+												"cities",
+												"1",
+												"comments",
+												"3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update comment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "comment",
+													"value": "test23",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:8088/api/v1/cities/1/comments/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8088",
+											"path": [
+												"api",
+												"v1",
+												"cities",
+												"1",
+												"comments",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create city",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|PebaX8jrN3ghWmP9eLXMjHy8LMWpyXUtYyfsr6Nj",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Berlin",
+											"type": "text"
+										},
+										{
+											"key": "country_id",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Berlin desc",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/v1/admin/cities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all cities",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_limit",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/v1/cities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"v1",
+										"cities"
+									],
+									"query": [
+										{
+											"key": "comments_limit",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Airport",
+					"item": [
+						{
+							"name": "Airport import",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/nikola/Downloads/airports.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/v1/admin/airport-import",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"airport-import"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Route import",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|oCHAra16xA8wTDjbTVk6ddRoqLXSTPaRNkvkho8j",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/nikola/Downloads/routes.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/v1/admin/route-import",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"route-import"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "marko",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Marko",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Đokić",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "marko1983",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "marko@djokic.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
