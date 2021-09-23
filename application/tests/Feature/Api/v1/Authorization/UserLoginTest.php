@@ -14,9 +14,10 @@ class UserLoginTest extends TestCase
     /** @test */
     public function user_can_be_authenticated()
     {
-        $roleId = Role::factory()->user()->create()->pluck('id')->toArray();
+        $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create(['username' => 'test']);
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         $response = $this->postJson($this->url, [
             'username' => 'test',
             'password' => 'password'
@@ -27,9 +28,10 @@ class UserLoginTest extends TestCase
     /** @test */
     public function user_with_wrong_credentials_can_not_be_authenticated()
     {
-        $roleId = Role::factory()->user()->create()->pluck('id')->toArray();
+        $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create(['username' => 'test']);
-        $user->syncRoles($roleId);
+        $user->syncRoles($roleIds);
         $response = $this->postJson($this->url, [
             'username' => 'test1',
             'password' => 'password'
