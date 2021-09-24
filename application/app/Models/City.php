@@ -34,4 +34,11 @@ class City extends Model
     {
         return $this->hasMany(Comment::class)->orderBy('id', 'DESC');
     }
+
+    public function scopeSearch($query, $name)
+    {
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+    }
 }

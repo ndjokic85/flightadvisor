@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 class CityRepository extends BaseRepository implements ICityRepository
 {
 
+    private array $defaultArgs = ['search' => '', 'comments_limit' => null];
+
     public function __construct(City $model)
     {
         parent::__construct($model);
@@ -19,10 +21,12 @@ class CityRepository extends BaseRepository implements ICityRepository
         return $this->model->whereName($name)->first();
     }
 
-    public function all(int $limit = null, int $skip = 0): Collection
+    public function filter(array $args = []): Collection
     {
-        return $this->model->with(['comments'])->get()->map(function ($query) use ($limit) {
-            return $query->setRelation('comments', $query->latestComments->take($limit));
-        });
+        $args = array_merge($this->defaultArgs, $args);
+        return $this->model->search($args['search'])->with(['comments'])
+            ->get()->map(function ($query) use ($args) {
+                return $query->setRelation('comments', $query->latestComments->take($args['comments_limit']));
+            });
     }
 }

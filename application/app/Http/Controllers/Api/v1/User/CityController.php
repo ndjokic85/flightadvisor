@@ -20,7 +20,7 @@ class CityController extends Controller
 
     public function index(CityIndexRequest $request) {
 
-        $cities = $this->cityRepository->all($request->comments_limit);
+        $cities = $this->cityRepository->filter($request->all());
         return CityResource::collection($cities)
         ->response()
         ->setStatusCode(Response::HTTP_PARTIAL_CONTENT);

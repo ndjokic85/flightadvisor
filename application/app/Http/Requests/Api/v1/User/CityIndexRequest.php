@@ -14,7 +14,7 @@ class CityIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'comments_limit' => 'numeric',
+            'comments_limit' => 'numeric|nullable',
         ];
     }
 }

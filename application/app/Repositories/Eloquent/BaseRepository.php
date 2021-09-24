@@ -41,6 +41,6 @@ class BaseRepository implements IRepository
 
     public function all(): Collection
     {
-        return $this->model->all();
+        return $this->model->all;
     }
 }

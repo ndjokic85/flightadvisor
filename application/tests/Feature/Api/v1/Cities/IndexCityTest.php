@@ -38,7 +38,7 @@ class IndexCityTest extends TestCase
             Comment::factory()->count(2)->create(['city_id' => $item->id]);
         });
 
-        $cities = $this->cityRepository->all();
+        $cities = $this->cityRepository->filter();
         Sanctum::actingAs($user);
         $this->getJson($this->url)
             ->assertSuccessful()
@@ -53,13 +53,30 @@ class IndexCityTest extends TestCase
         $roleIds = collect([$role->id])->toArray();
         $user = User::factory()->create();
         $user->syncRoles($roleIds);
-        $commentsLimit = 3;
         $city = City::factory()->create(['country_id' => $country->id]);
         Comment::factory()->count(5)->create(['city_id' => $city->id]);
-
-        $cities = $this->cityRepository->all($commentsLimit);
+        $args['comments_limit'] = 3;
+        $cities = $this->cityRepository->filter($args);
         Sanctum::actingAs($user);
-        $this->getJson($this->url . '?comments_limit=' . $commentsLimit)
+        $this->getJson($this->url . '?comments_limit=' . $args['comments_limit'])
+            ->assertSuccessful()
+            ->assertExactJson(CityResource::collection($cities)->response()->getData(true));
+    }
+
+    /** @test */
+    public function cities_are_searchable()
+    {
+        $role = Role::factory()->user()->create();
+        $roleIds = collect([$role->id])->toArray();
+        $user = User::factory()->create();
+        $user->syncRoles($roleIds);
+        City::factory()->create(['name' => 'New York']);
+        City::factory()->create(['name' => 'London']);
+        City::factory()->create(['name' => 'New Delhi']);
+        $args['search'] = 'New';
+        $cities = $this->cityRepository->filter($args);
+        Sanctum::actingAs($user);
+        $this->getJson($this->url . '?search=' . $args['search'])
             ->assertSuccessful()
             ->assertExactJson(CityResource::collection($cities)->response()->getData(true));
     }
