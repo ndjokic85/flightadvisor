@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\FlightAdvisor\Routes\BreathFirstRouteSearcher;
-use App\FlightAdvisor\Routes\IRouteSearchable;
+use App\FlightAdvisor\Routes\Dijkstra;
+use App\FlightAdvisor\Routes\IRoute;
 use Illuminate\Support\ServiceProvider;
 
 class FlightAdvisorServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class FlightAdvisorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(IRouteSearchable::class, BreathFirstRouteSearcher::class);
+        $this->app->bind(IRoute::class, Dijkstra::class);
     }
     /**
      * Bootstrap services.
