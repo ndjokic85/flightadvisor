@@ -13,7 +13,7 @@ class CityRepository extends BaseRepository implements ICityRepository
 
     public function __construct(City $model)
     {
-        $this->args = array_merge($this->args, $this->defaultArgs);
+        $this->args = array_merge($this->args, $this->baseArgs);
         parent::__construct($model);
     }
 
