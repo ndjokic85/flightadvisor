@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers\Api\v1\User;
 
+use App\FlightAdvisor\Routes\IRouteSearchable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\v1\User\CityIndexRequest;
 use App\Http\Requests\Api\v1\User\RouteIndexRequest;
-use App\Http\Resources\CityResource;
-use App\Repositories\ICityRepository;
-use Illuminate\Http\Response;
 
 class RouteController extends Controller
 {
 
-  /*   private ICityRepository $cityRepository;
+  private IRouteSearchable $routeSearcher;
 
-    public function __construct(ICityRepository $cityRepository)
-    {
-        $this->cityRepository = $cityRepository;
-    } */
+  public function __construct(IRouteSearchable $routeSearcher)
+  {
+    $this->routeSearcher = $routeSearcher;
+  }
 
-    public function index(RouteIndexRequest $request) {
-
-       /*  $cities = $this->cityRepository->all($request->comments_limit);
-        return CityResource::collection($cities)
-        ->response()
-        ->setStatusCode(Response::HTTP_PARTIAL_CONTENT); */
-    }
+  public function index(RouteIndexRequest $request)
+  {
+    $routes = $this->routeSearcher->findCheapestFlight(234, 456);
+  }
 }
