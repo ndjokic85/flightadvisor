@@ -38,7 +38,7 @@ class IndexCityTest extends TestCase
             Comment::factory()->count(2)->create(['city_id' => $item->id]);
         });
 
-        $cities = $this->cityRepository->filter();
+        $cities = $this->cityRepository->all();
         Sanctum::actingAs($user);
         $this->getJson($this->url)
             ->assertSuccessful()
@@ -56,7 +56,7 @@ class IndexCityTest extends TestCase
         $city = City::factory()->create(['country_id' => $country->id]);
         Comment::factory()->count(5)->create(['city_id' => $city->id]);
         $args['comments_limit'] = 3;
-        $cities = $this->cityRepository->filter($args);
+        $cities = $this->cityRepository->all($args);
         Sanctum::actingAs($user);
         $this->getJson($this->url . '?comments_limit=' . $args['comments_limit'])
             ->assertSuccessful()
@@ -73,10 +73,10 @@ class IndexCityTest extends TestCase
         City::factory()->create(['name' => 'New York']);
         City::factory()->create(['name' => 'London']);
         City::factory()->create(['name' => 'New Delhi']);
-        $args['search'] = 'New';
-        $cities = $this->cityRepository->filter($args);
+        $args['name'] = 'New';
+        $cities = $this->cityRepository->all($args);
         Sanctum::actingAs($user);
-        $this->getJson($this->url . '?search=' . $args['search'])
+        $this->getJson($this->url . '?name=' . $args['name'])
             ->assertSuccessful()
             ->assertExactJson(CityResource::collection($cities)->response()->getData(true));
     }

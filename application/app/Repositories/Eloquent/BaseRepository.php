@@ -10,6 +10,8 @@ class BaseRepository implements IRepository
 {
     protected Model $model;
 
+    protected array $defaultArgs = ['limit' => null, 'skip' => 0];
+
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -39,8 +41,9 @@ class BaseRepository implements IRepository
         $model->delete();
     }
 
-    public function all(): Collection
+    public function all(array $args = []): Collection
     {
-        return $this->model->all;
+        $args = array_merge($this->defaultArgs, $args);
+        return $this->model->skip($args['skip'])->take($args['limit'])->get();
     }
 }
