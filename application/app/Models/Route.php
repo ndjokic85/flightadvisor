@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Route extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'airline',
         'airline_id',
@@ -27,11 +27,11 @@ class Route extends Model
 
     public function sourceAirport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'source_airport_id');
+        return $this->belongsTo(Airport::class, 'source_airport_id')->with('city');
     }
 
     public function destinationAirport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'destinaton_airport_id');
+        return $this->belongsTo(Airport::class, 'destination_airport_id')->with('city');
     }
 }

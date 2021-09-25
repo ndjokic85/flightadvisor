@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\FlightAdvisor\Routes\Dijkstra;
 use App\FlightAdvisor\Routes\IRoute;
+use App\FlightAdvisor\Services\GraphCreator;
+use App\FlightAdvisor\Services\IGraphCreatable;
 use Illuminate\Support\ServiceProvider;
 
 class FlightAdvisorServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class FlightAdvisorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(IRoute::class, Dijkstra::class);
+        $this->app->bind(IGraphCreatable::class, GraphCreator::class);
     }
     /**
      * Bootstrap services.

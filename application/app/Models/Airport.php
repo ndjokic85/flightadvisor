@@ -33,6 +33,7 @@ class Airport extends Model
     {
         return $this->belongsTo(City::class);
     }
+
     public function routes(): HasMany
     {
         return $this->hasMany(Route::class);

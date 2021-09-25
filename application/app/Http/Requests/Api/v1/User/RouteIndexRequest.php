@@ -14,12 +14,12 @@ class RouteIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'source_airport_id' => [
+            'source' => [
                 'numeric',
                 'required',
                 'exists:airports,id'
             ],
-            'destination_airport_id' => [
+            'destination' => [
                 'numeric',
                 'required',
                 'exists:airports,id'
