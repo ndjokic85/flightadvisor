@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\v1\Users;
+namespace Tests\Feature\Api\V1\Users;
 
 use App\Models\City;
 use App\Models\Country;

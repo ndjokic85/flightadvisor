@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\v1\Imports;
+namespace Tests\Feature\Api\V1\Imports;
 
 use App\Models\City;
 use App\Models\Role;

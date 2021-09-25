@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\v1\Authorization;
+namespace Tests\Feature\Api\V1\Authorization;
 
 use App\Models\Role;
 use App\Models\User;
@@ -46,7 +46,7 @@ class UserLoginTest extends TestCase
         $response = $this->postJson($this->url, [
             'password' => 'test'
         ]);
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $response->assertJsonValidationErrors(['password']);
         $this->assertSame(
             'The password must be at least 6 characters.',
@@ -60,7 +60,7 @@ class UserLoginTest extends TestCase
         $response = $this->postJson($this->url, [
             'username' => ''
         ]);
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $response->assertJsonValidationErrors(['username']);
         $this->assertSame(
             'The username field is required.',
@@ -74,7 +74,7 @@ class UserLoginTest extends TestCase
         $response = $this->postJson($this->url, [
             'password' => ''
         ]);
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
         $response->assertJsonValidationErrors(['password']);
         $this->assertSame(
             'The password field is required.',
