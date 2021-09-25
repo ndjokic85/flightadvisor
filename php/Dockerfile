@@ -45,8 +45,6 @@ USER www
 WORKDIR /var/www
 
 CMD ["php-fpm"] && \
-    composer install && \
-    wait-for-it mysql:4306 -- php bin/console artisan migrate:fresh --seed && \
     supervisord -c /usr/bin/supervisord.conf
 
 # Expose port 9000 and start php-fpm server
