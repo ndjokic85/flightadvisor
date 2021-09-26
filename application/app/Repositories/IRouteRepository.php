@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface IRouteRepository
 {
-    public function allGrouppedBy(string $column): Collection;
+    public function allGrouppedBySourceAirport(): array;
     public function findBySourceAndDestination(int $source, int $destinaton): Route;
 }

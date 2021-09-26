@@ -18,7 +18,6 @@ class FlightAdvisorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(IRoute::class, Dijkstra::class);
-        $this->app->bind(IGraphCreatable::class, GraphCreator::class);
     }
     /**
      * Bootstrap services.

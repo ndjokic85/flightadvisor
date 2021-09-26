@@ -14,9 +14,14 @@ class RouteRepository extends BaseRepository implements IRouteRepository
         parent::__construct($model);
     }
 
-    public function allGrouppedBy(string $column): Collection
+    public function allGrouppedBySourceAirport(): array
     {
-        return $this->model->get()->groupBy($column);
+        return $this->model->select('source_airport_id', 'destination_airport_id', 'price')
+            ->get()->groupBy('source_airport_id')->transform(function ($item) {
+                return Collection::wrap($item)->mapWithKeys(function ($item) {
+                    return [$item->destination_airport_id => $item->price];
+                });
+            })->all();
     }
 
     public function findBySourceAndDestination(int $source, int $destination): Route
